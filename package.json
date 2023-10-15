@@ -1,0 +1,22 @@
+{
+  "name": "drizzle-mockdata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "execute": "tsx src/queries/select.ts",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "tsx ./src/migrate.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "drizzle-orm": "0.27.0",
+    "postgres": "3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.5",
+    "drizzle-kit": "0.19.3",
+    "tsx": "^3.13.0"
+  }
+}
