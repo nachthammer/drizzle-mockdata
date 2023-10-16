@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "90318cf7-4b25-45c3-800e-2e7e9fb88d08",
-  "prevId": "db950454-949e-4d35-8e58-7dc62ccef4c1",
+  "id": "5af21cec-aebc-41d8-bd2e-4e3bddabc013",
+  "prevId": "90318cf7-4b25-45c3-800e-2e7e9fb88d08",
   "tables": {
     "actor": {
       "name": "actor",
@@ -191,12 +191,6 @@
         "language": {
           "name": "language",
           "type": "varchar(64)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "foundation_date": {
-          "name": "foundation_date",
-          "type": "date",
           "primaryKey": false,
           "notNull": true
         },

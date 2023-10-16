@@ -1,0 +1,1 @@
+ALTER TABLE "country" ALTER COLUMN "foundation_date" SET DATA TYPE date;

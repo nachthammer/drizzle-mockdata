@@ -6,14 +6,14 @@ import {
   pgTable,
   varchar,
   integer,
+  date,
 } from "drizzle-orm/pg-core";
 
 export const countrySchema = pgTable("country", {
   id: serial("country_id").primaryKey(),
   name: varchar("name", { length: 64 }).notNull(),
   language: varchar("language", { length: 64 }).notNull(),
-  foundationDate: timestamp("foundation_date").notNull(),
-  lastUpdate: timestamp("last_update")
+  lastUpdate: timestamp("last_update", { mode: "date" })
     .notNull()
     .default(sql`now()`),
 });
@@ -22,10 +22,10 @@ export const citySchema = pgTable("city", {
   id: serial("city_id").primaryKey(),
   name: varchar("name", { length: 64 }),
   nofCitizens: integer("nof_citizens"),
-  countryId: integer("countryId")
+  countryId: integer("country_id")
     .references(() => countrySchema.id)
     .notNull(),
-  lastUpdate: timestamp("last_update")
+  lastUpdate: timestamp("last_update", { mode: "date" })
     .notNull()
     .default(sql`now()`),
 });
@@ -48,7 +48,7 @@ export const actorSchema = pgTable("actor", {
   lastName: text("last_name").notNull(),
   phoneNumber: varchar("phone_number", { length: 20 }),
   adressId: integer("address_id")
-    .references(() => addressSchema.addressId)
+    .references(() => addressSchema.id)
     .notNull(),
   lastUpdate: timestamp("last_update")
     .notNull()

@@ -6,7 +6,8 @@
   "scripts": {
     "execute": "tsx src/queries/select.ts",
     "db:generate": "drizzle-kit generate:pg",
-    "db:migrate": "tsx ./src/migrate.ts"
+    "db:migrate": "tsx ./src/migrate.ts",
+    "db:seed": "tsx ./src/seed/seed.ts"
   },
   "author": "",
   "license": "ISC",
