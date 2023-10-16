@@ -3,9 +3,13 @@ import { addressSchema, citySchema, countrySchema } from "../schema";
 import { countries as mockCountries } from "./data/countries";
 import { cities as mockCities } from "./data/cities";
 import { addresses as mockAddresses } from "./data/adresses";
+import { dropAllData } from "./drop-all";
 
 export async function seed() {
-  console.debug("inserting", { mockCountries });
+  console.info("Dropping all data...");
+  await dropAllData();
+  console.info("Dropping data successful");
+
   const countries = await db
     .insert(countrySchema)
     .values([...mockCountries])
