@@ -4,6 +4,7 @@ import {
   addressSchema,
   citySchema,
   countrySchema,
+  movieActorsSchema,
   movieSchema,
 } from "../schema";
 import { countries as mockCountries } from "./data/countries";
@@ -11,6 +12,7 @@ import { cities as mockCities } from "./data/cities";
 import { addresses as mockAddresses } from "./data/adresses";
 import { actors as mockActors } from "./data/actors";
 import { movies as mockMovies } from "./data/movies";
+import { movieActors as mockMovieActors } from "./data/movieActors";
 import { dropAllData } from "./drop-all";
 
 export async function seed() {
@@ -81,6 +83,8 @@ export async function seed() {
     .values([..._mockActors])
     .returning({
       actorId: actorSchema.id,
+      actorFirstName: actorSchema.firstName,
+      actorLastName: actorSchema.lastName,
     });
   console.info(`Inserted ${actors.length} actors.`);
 
@@ -95,8 +99,26 @@ export async function seed() {
     .values([..._mockMovies])
     .returning({
       movieId: movieSchema.id,
+      movieTitle: movieSchema.title,
     });
   console.info(`Inserted ${movies.length} movies.`);
+
+  const _mockMovieActors = mockMovieActors.map((comb) => ({
+    actorId: actors.find(
+      (actor) =>
+        actor.actorFirstName === comb.firstname &&
+        actor.actorLastName === comb.lastname
+    ).actorId,
+    movieId: movies.find((movie) => movie.movieTitle === comb.title).movieId,
+  }));
+
+  const movieActors = await db
+    .insert(movieActorsSchema)
+    .values([..._mockMovieActors])
+    .returning({
+      movieActorId: movieActorsSchema.id,
+    });
+  console.info(`Inserted ${movieActors.length} movie-actor combinations.`);
 }
 
 seed()
