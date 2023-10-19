@@ -10,12 +10,12 @@ import {
 } from "../schema";
 
 export async function dropAllData() {
+  await db.delete(movieActorsSchema);
   await db.delete(actorSchema);
   await db.delete(addressSchema);
   await db.delete(citySchema);
   await db.delete(countrySchema);
   await db.delete(movieSchema);
-  await db.delete(movieActorsSchema);
 
   // Make the primary key sequence counting start at one again so we do not have a growing starting id, every time we do the dataload
   //   await db.execute(sql`
